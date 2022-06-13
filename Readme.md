@@ -21,3 +21,10 @@ curl http://localhost:8080/log \
 --request "POST" \
 --data  '{"data":"logging single line","statusCode":201, "level":"INFO",}'
 ```
+
+
+## Resources
+
+1. https://github.com/chunghha/docker-go-gin/blob/master/Dockerfile
+1. https://github.com/gin-gonic/gin
+1. https://github.com/IBM/template-go-gin/blob/master/Dockerfile

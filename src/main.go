@@ -43,9 +43,16 @@ func postLog(c *gin.Context) {
 	}
 	c.IndentedJSON(statusCode, data)
 }
+func getPing(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, gin.H{
+		"message": "pong",
+	})
+}
+
 func main() {
 	router := gin.Default()
 	router.POST("/log", postLog)
+	router.GET("/ping", getPing)
 
-	router.Run("localhost:8080")
+	router.Run(":8080")
 }
