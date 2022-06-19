@@ -41,10 +41,10 @@ func postLog(c *gin.Context) {
 	if len(http.StatusText(newLog.StatusCode)) == 0 {
 		data = "Incorrect status code"
 	}
-	c.IndentedJSON(statusCode, data)
+	c.JSON(statusCode, data)
 }
 func getPing(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"message": "pong",
 	})
 }
