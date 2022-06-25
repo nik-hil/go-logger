@@ -11,9 +11,10 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download
 
-COPY . .
+WORKDIR /api/src
+COPY ./src /api/src
 # RUN go build -o ./app  ./src/*
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o ./app  ./src/*
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /api/app  /api/src/*
 
 FROM alpine:latest
 
