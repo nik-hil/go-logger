@@ -49,10 +49,15 @@ func getPing(c *gin.Context) {
 	})
 }
 
-func main() {
+// This is where you create a gin.Default() and add routes to it
+func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	router.POST("/log", postLog)
 	router.GET("/ping", getPing)
+	return router
+}
 
+func main() {
+	router := SetupRouter()
 	router.Run(":8080")
 }

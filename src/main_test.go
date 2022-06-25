@@ -11,20 +11,18 @@ import (
 )
 
 func TestPingAPI(t *testing.T) {
-	router := gin.Default()
+	router := SetupRouter()
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest(http.MethodGet, "/ping", nil)
 	router.ServeHTTP(w, req)
 
 	assert.Equal(t, http.StatusOK, w.Code)
 
-	var response map[string]string
-	err := json.Unmarshal([]byte(w.Body.String()), &response)
+	var response gin.H
+	err := json.Unmarshal(w.Body.Bytes(), &response)
 	assert.Nil(t, err)
 	assert.Equal(t, gin.H{
 		"message": "pong",
 	}, response)
 
 }
-
-// https://craig-childs.medium.com/testing-gin-json-responses-1f258ce3b0b1
