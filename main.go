@@ -41,18 +41,23 @@ func postLog(c *gin.Context) {
 	if len(http.StatusText(newLog.StatusCode)) == 0 {
 		data = "Incorrect status code"
 	}
-	c.IndentedJSON(statusCode, data)
+	c.JSON(statusCode, data)
 }
 func getPing(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"message": "pong",
 	})
 }
 
-func main() {
+// This is where you create a gin.Default() and add routes to it
+func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	router.POST("/log", postLog)
 	router.GET("/ping", getPing)
+	return router
+}
 
+func main() {
+	router := SetupRouter()
 	router.Run(":8080")
 }
